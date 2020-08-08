@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import table from './weatherType';
+import Days from './Days';
+
 const api = {
     key:  "497d29378ab7e397129f0701b0c9f5ea",
     base: "api.openweathermap.org/data/2.5/"
@@ -11,17 +13,16 @@ const Weather = () => {
     
     const [query, setQuery] = useState('');
     const [weather, setWeather] = useState({});
-
     
     const search = evt => {
         if(evt.key === "Enter") {
-            axios.get(`https://${api.base}weather?q=${query}&APPID=${api.key}`)
+            axios.get(`https://${api.base}forecast?q=${query}&units=metric&APPID=${api.key}&lang=fr`)
             .then(res => {
-                console.log(res)
                 const test = res.data
                 setWeather(test)
                 setQuery('')
                 console.log(test);
+                console.log(<Days day/>);
             })
         }
     }
@@ -36,14 +37,14 @@ const Weather = () => {
                     value={query}
                     onKeyPress={search}
                 />
-        {(typeof weather.main != "undefined") ? (
+        {(typeof weather.city != "undefined") ? (
             <div>
                 <span className="card-title">
-                    {weather.name}, {weather.sys.country}
+                    {weather.city.name}, {weather.city.country}
                     </span>
-                <p><img src={table[weather.weather[0].id]} alt="logo_weather"/></p>
-                <span className="temperature">{Math.round(weather.main.temp-273.5)}°C</span>
-                <div className="wind">Wind {weather.wind.speed} km/h ({weather.wind.deg}°)</div>
+                {/* <p><img src={table[weather.list[Days.day].weather[0].id]} alt="logo_weather"/></p>
+                <span className="temperature">{Math.round(weather.list[Days.day].main.temp)}°C</span>
+                <div className="wind">Wind {Math.round((weather.list[Days.day].wind.speed)*3.6)} km/h ({weather.list[Days.day].wind.deg}°)</div> */}
             </div>
          ) : ('')} 
             

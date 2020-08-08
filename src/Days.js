@@ -2,19 +2,26 @@ import React from 'react'
 
 const Days = () => {
 
-// api.openweathermap.org/data/2.5/forecast?id={city ID}&appid={your api key}
+    const day = {
+        count: 0
+    }
+
+    function changeDay(e) {
+        day.count = parseInt(e.target.value)
+        console.log(day.count);
+    }
 
     return(
         <div className="card-action">
-                        <a href="test">Thursday</a>
-                        <a href="sdf">Friday</a>
-                        <a href="asdq">Saturday</a>
-                        <a href="azea">Sunday</a>
-                        <a href="zeazes">Monday</a>
+                        <button className="days" onClick={(e) => changeDay(e)} value="8">Thursday</button>
+                        <button className="days" onClick={(e) => changeDay(e)} value="16">Friday</button>
+                        <button className="days" onClick={(e) => changeDay(e)} value="24">Saturday</button>
+                        <button className="days" onClick={(e) => changeDay(e)} value="32">Sunday</button>
+                        <button className="days" onClick={(e) => changeDay(e)} value="40">Monday</button>
         </div>
    
     )
 
 }
 
-export default Days
+export default Days.day
