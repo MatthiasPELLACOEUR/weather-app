@@ -1,27 +1,30 @@
-import React from 'react'
+import React from 'react';
+import Moment from 'moment';
 
-const Days = () => {
+const Days = (props) => {
 
-    const day = {
-        count: 0
-    }
-
-    function changeDay(e) {
-        day.count = parseInt(e.target.value)
-        console.log(day.count);
-    }
 
     return(
         <div className="card-action">
-                        <button className="days" onClick={(e) => changeDay(e)} value="8">Thursday</button>
-                        <button className="days" onClick={(e) => changeDay(e)} value="16">Friday</button>
-                        <button className="days" onClick={(e) => changeDay(e)} value="24">Saturday</button>
-                        <button className="days" onClick={(e) => changeDay(e)} value="32">Sunday</button>
-                        <button className="days" onClick={(e) => changeDay(e)} value="40">Monday</button>
+                        <a href="#Today" onClick={() => props.day(0)}>
+                            {Moment().format('dddd')}
+                        </a>
+                        <a href="#2ndDay" onClick={() => props.day(8)}>
+                            {Moment().add(1, 'days').format('dddd')}
+                        </a>
+                        <a href="#3rdDay" onClick={() => props.day(16)}>
+                            {Moment().add(2, 'days').format('dddd')}
+                        </a>
+                        <a href="#4thDay" onClick={() => props.day(24)}>
+                            {Moment().add(3, 'days').format('dddd')}
+                        </a>
+                        <a href="#5thDay" onClick={() => props.day(32)}>
+                            {Moment().add(4, 'days').format('dddd')}
+                        </a>
         </div>
    
     )
 
 }
 
-export default Days.day
+export default Days
