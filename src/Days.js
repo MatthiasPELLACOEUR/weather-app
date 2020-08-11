@@ -5,7 +5,7 @@ const Days = (props) => {
 
 
     return(
-        <div className="card-action">
+        <div className="card-action row">
                         <a href="#Today" onClick={() => props.day(0)}>
                             {Moment().format('dddd')}
                         </a>

@@ -1,23 +1,34 @@
-import React from "react";
-// import Weather from "./Weather";
-// import { render } from "react-dom";
+import React, { useEffect } from "react";
 
-const Geoloc = () => {
+const Geoloc = (props) => {
   
-    const componentDidMount = () => {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        console.log("Latitude is :", position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
-      });
+  const getLocation = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition)
+    } else {
+        return "Geolocation is not supported by this browser"
     }
+  }
+
+  const showPosition = (position) => {
+      props.setCoords({
+          lat:position.coords.latitude,
+          lon: position.coords.longitude
+      })
+  }
   
-    
-    return (
-        <div>
-            {/* <Weather long={position.coords.longitude} lat={position.coords.latitude}/>  */}
-        </div>
-    );
+  useEffect(() => {
+    getLocation()
+  }, [])
+
+  return(
+    <div>
+      Longitude : {props.coords.lon}, 
+      Latitude :  {props.coords.lat}
+    </div>
+  )
 }
+
   
 
   export default Geoloc;
